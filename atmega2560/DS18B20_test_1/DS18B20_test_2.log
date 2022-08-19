@@ -1,0 +1,396 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2021.12.31 11:50:40 =~=~=~=~=~=~=~=~=~=~=~=
+Frpproximate Altitude = 6418.10ft
+Humidity = 18.73%
+
+Temperature difference of: 3.63*F (2.02*C)
+
+From DS18B20 sensor: 
+Temperature = 70.59*F(21.44*C)
+
+From BME280 sensor: 
+Temperature = 66.96*F(19.42*C)
+Pressure = 799.31hPa
+Approximate Altitude = 6417.98ft
+Humidity = 18.73%
+
+Temperature difference of: 3.65*F (2.03*C)
+
+From DS18B20 sensor: 
+Temperature = 70.59*F(21.44*C)
+
+From BME280 sensor: 
+Temperature = 66.94*F(19.41*C)
+Pressure = 799.34hPa
+Approximate Altitude = 6417.93ft
+Humidity = 18.73%
+
+Temperature difference of: 3.65*F (2.03*C)
+
+From DS18B20 sensor: 
+Temperature = 70.47*F(21.37*C)
+
+From BME280 sensor: 
+Temperature = 66.94*F(19.41*C)
+Pressure = 799.33hPa
+Approximate Altitude = 6417.76ft
+Humidity = 18.75%
+
+Temperature difference of: 3.54*F (1.97*C)
+
+From DS18B20 sensor: 
+Temperature = 70.47*F(21.37*C)
+
+From BME280 sensor: 
+Temperature = 66.92*F(19.40*C)
+Pressure = 799.32hPa
+Approximate Altitude = 6418.30ft
+Humidity = 18.75%
+
+Temperature difference of: 3.54*F (1.97*C)
+
+From DS18B20 sensor: 
+Temperature = 70.47*F(21.37*C)
+
+From BME280 sensor: 
+Temperature = 66.94*F(19.41*C)
+Pressure = 799.32hPa
+Approximate Altitude = 6418.09ft
+Humidity = 18.77%
+
+Temperature difference of: 3.56*F (1.98*C)
+
+From DS18B20 sensor: 
+Temperature = 70.36*F(21.31*C)
+
+From BME280 sensor: 
+Temperature = 66.92*F(19.40*C)
+Pressure = 799.32hPa
+Approximate Altitude = 6418.24ft
+Humidity = 18.74%
+
+Temperature difference of: 3.44*F (1.91*C)
+
+From DS18B20 sensor: 
+Temperature = 70.36*F(21.31*C)
+
+From BME280 sensor: 
+Temperature = 66.92*F(19.40*C)
+Pressure = 799.34hPa
+Approximate Altitude = 6417.63ft
+Humidity = 18.77%
+
+Temperature difference of: 3.44*F (1.91*C)
+
+From DS18B20 sensor: 
+Temperature = 70.36*F(21.31*C)
+
+From BME280 sensor: 
+Temperature = 66.90*F(19.39*C)
+Pressure = 799.33hPa
+Approximate Altitude = 6417.90ft
+Humidity = 18.77%
+
+Temperature difference of: 3.46*F (1.92*C)
+
+From DS18B20 sensor: 
+Temperature = 70.25*F(21.25*C)
+
+From BME280 sensor: 
+Temperature = 66.90*F(19.39*C)
+Pressure = 799.30hPa
+Approximate Altitude = 6418.89ft
+Humidity = 18.77%
+
+Temperature difference of: 3.35*F (1.86*C)
+
+From DS18B20 sensor: 
+Temperature = 70.25*F(21.25*C)
+
+From BME280 sensor: 
+Temperature = 66.90*F(19.39*C)
+Pressure = 799.34hPa
+Approximate Altitude = 6417.74ft
+Humidity = 18.77%
+
+Temperature difference of: 3.37*F (1.87*C)
+
+From DS18B20 sensor: 
+Temperature = 70.25*F(21.25*C)
+
+From BME280 sensor: 
+Temperature = 66.90*F(19.39*C)
+Pressure = 799.33hPa
+Approximate Altitude = 6417.94ft
+Humidity = 18.78%
+
+Temperature difference of: 3.35*F (1.86*C)
+
+From DS18B20 sensor: 
+Temperature = 70.25*F(21.25*C)
+
+From BME280 sensor: 
+Temperature = 66.88*F(19.38*C)
+Pressure = 799.33hPa
+Approximate Altitude = 6418.05ft
+Humidity = 18.78%
+
+Temperature difference of: 3.38*F (1.88*C)
+
+From DS18B20 sensor: 
+Temperature = 70.14*F(21.19*C)
+
+From BME280 sensor: 
+Temperature = 66.88*F(19.38*C)
+Pressure = 799.36hPa
+Approximate Altitude = 6417.02ft
+Humidity = 18.78%
+
+Temperature difference of: 3.25*F (1.81*C)
+
+From DS18B20 sensor: 
+Temperature = 70.14*F(21.19*C)
+
+From BME280 sensor: 
+Temperature = 66.87*F(19.37*C)
+Pressure = 799.34hPa
+Approximate Altitude = 6417.72ft
+Humidity = 18.78%
+
+Temperature difference of: 3.27*F (1.82*C)
+
+From DS18B20 sensor: 
+Temperature = 70.14*F(21.19*C)
+
+From BME280 sensor: 
+Temperature = 66.87*F(19.37*C)
+Pressure = 799.33hPa
+Approximate Altitude = 6417.76ft
+Humidity = 18.80%
+
+Temperature difference of: 3.27*F (1.82*C)
+
+From DS18B20 sensor: 
+Temperature = 70.02*F(21.12*C)
+
+From BME280 sensor: 
+Temperature = 66.87*F(19.37*C)
+Pressure = 799.36hPa
+Approximate Altitude = 6416.83ft
+Humidity = 18.80%
+
+Temperature difference of: 3.16*F (1.75*C)
+
+From DS18B20 sensor: 
+Temperature = 70.02*F(21.12*C)
+
+From BME280 sensor: 
+Temperature = 66.85*F(19.36*C)
+Pressure = 799.32hPa
+Approximate Altitude = 6417.21ft
+Humidity = 18.80%
+
+Temperature difference of: 3.16*F (1.75*C)
+
+From DS18B20 sensor: 
+Temperature = 70.02*F(21.12*C)
+
+From BME280 sensor: 
+Temperature = 66.83*F(19.35*C)
+Pressure = 799.33hPa
+Approximate Altitude = 6417.81ft
+Humidity = 18.81%
+
+Temperature difference of: 3.18*F (1.76*C)
+
+From DS18B20 sensor: 
+Temperature = 70.02*F(21.12*C)
+
+From BME280 sensor: 
+Temperature = 66.83*F(19.35*C)
+Pressure = 799.32hPa
+Approximate Altitude = 6417.14ft
+Humidity = 18.81%
+
+Temperature difference of: 3.19*F (1.77*C)
+
+From DS18B20 sensor: 
+Temperature = 69.91*F(21.06*C)
+
+From BME280 sensor: 
+Temperature = 66.83*F(19.35*C)
+Pressure = 799.36hPa
+Approximate Altitude = 6416.75ft
+Humidity = 18.82%
+
+Temperature difference of: 3.08*F (1.71*C)
+
+From DS18B20 sensor: 
+Temperature = 69.91*F(21.06*C)
+
+From BME280 sensor: 
+Temperature = 66.83*F(19.35*C)
+Pressure = 799.35hPa
+Approximate Altitude = 6417.29ft
+Humidity = 18.83%
+
+Temperature difference of: 3.08*F (1.71*C)
+
+From DS18B20 sensor: 
+Temperature = 69.91*F(21.06*C)
+
+From BME280 sensor: 
+Temperature = 66.83*F(19.35*C)
+Pressure = 799.35hPa
+Approximate Altitude = 6417.24ft
+Humidity = 18.82%
+
+Temperature difference of: 3.08*F (1.71*C)
+
+From DS18B20 sensor: 
+Temperature = 69.91*F(21.06*C)
+
+From BME280 sensor: 
+Temperature = 66.83*F(19.35*C)
+Pressure = 799.36hPa
+Approximate Altitude = 6416.80ft
+Humidity = 18.83%
+
+Temperature difference of: 3.10*F (1.72*C)
+
+From DS18B20 sensor: 
+Temperature = 69.80*F(21.00*C)
+
+From BME280 sensor: 
+Temperature = 66.81*F(19.34*C)
+Pressure = 799.36hPa
+Approximate Altitude = 6417.07ft
+Humidity = 18.84%
+
+Temperature difference of: 2.99*F (1.66*C)
+
+From DS18B20 sensor: 
+Temperature = 69.80*F(21.00*C)
+
+From BME280 sensor: 
+Temperature = 66.81*F(19.34*C)
+Pressure = 799.34hPa
+Approximate Altitude = 6417.45ft
+Humidity = 18.84%
+
+Temperature difference of: 2.99*F (1.66*C)
+
+From DS18B20 sensor: 
+Temperature = 70.02*F(21.12*C)
+
+From BME280 sensor: 
+Temperature = 66.81*F(19.33*C)
+Pressure = 799.34hPa
+Approximate Altitude = 6417.67ft
+Humidity = 18.82%
+
+Temperature difference of: 3.23*F (1.80*C)
+
+From DS18B20 sensor: 
+Temperature = 70.93*F(21.62*C)
+
+From BME280 sensor: 
+Temperature = 66.79*F(19.34*C)
+Pressure = 799.34hPa
+Approximate Altitude = 6417.56ft
+Humidity = 18.83%
+
+Temperature difference of: 4.13*F (2.30*C)
+
+From DS18B20 sensor: 
+Temperature = 71.94*F(22.19*C)
+
+From BME280 sensor: 
+Temperature = 66.79*F(19.33*C)
+Pressure = 799.34hPa
+Approximate Altitude = 6417.61ft
+Humidity = 18.83%
+
+Temperature difference of: 5.14*F (2.86*C)
+
+From DS18B20 sensor: 
+Temperature = 73.29*F(22.94*C)
+
+From BME280 sensor: 
+Temperature = 66.79*F(19.33*C)
+Pressure = 799.35hPa
+Approximate Altitude = 6417.22ft
+Humidity = 18.83%
+
+Temperature difference of: 6.49*F (3.61*C)
+
+From DS18B20 sensor: 
+Temperature = 74.52*F(23.62*C)
+
+From BME280 sensor: 
+Temperature = 66.79*F(19.33*C)
+Pressure = 799.32hPa
+Approximate Altitude = 6418.33ft
+Humidity = 18.84%
+
+Temperature difference of: 7.73*F (4.30*C)
+
+From DS18B20 sensor: 
+Temperature = 75.20*F(24.00*C)
+
+From BME280 sensor: 
+Temperature = 66.79*F(19.33*C)
+Pressure = 799.32hPa
+Approximate Altitude = 6418.11ft
+Humidity = 18.82%
+
+Temperature difference of: 8.41*F (4.67*C)
+
+From DS18B20 sensor: 
+Temperature = 75.31*F(24.06*C)
+
+From BME280 sensor: 
+Temperature = 66.79*F(19.33*C)
+Pressure = 799.35hPa
+Approximate Altitude = 6417.12ft
+Humidity = 18.84%
+
+Temperature difference of: 8.52*F (4.73*C)
+
+From DS18B20 sensor: 
+Temperature = 75.31*F(24.06*C)
+
+From BME280 sensor: 
+Temperature = 66.79*F(19.33*C)
+Pressure = 799.34hPa
+Approximate Altitude = 6418.00ft
+Humidity = 18.84%
+
+Temperature difference of: 8.52*F (4.73*C)
+
+From DS18B20 sensor: 
+Temperature = 75.31*F(24.06*C)
+
+From BME280 sensor: 
+Temperature = 66.79*F(19.33*C)
+Pressure = 799.34hPa
+Approximate Altitude = 6417.87ft
+Humidity = 18.84%
+
+Temperature difference of: 8.52*F (4.73*C)
+
+From DS18B20 sensor: 
+Temperature = 75.31*F(24.06*C)
+
+From BME280 sensor: 
+Temperature = 66.78*F(19.32*C)
+Pressure = 799.35hPa
+Approximate Altitude = 6418.37ft
+Humidity = 18.84%
+
+Temperature difference of: 8.52*F (4.73*C)
+
+From DS18B20 sensor: 
+Temperature = 75.31*F(24.06*C)
+
+From BME280 sensor: 
+Tempera
