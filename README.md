@@ -1,4 +1,1 @@
-## Arduino Sketches
-
-"C/C++" code for arduino dev boards. Files and directories are fairly unstructured
-but maybe that'll change.
+Repo I use for some quick prototypes on whatever microcontroller I am working on
