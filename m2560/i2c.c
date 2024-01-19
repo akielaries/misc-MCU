@@ -1,89 +1,143 @@
+// Scan for I2C devices on a ATmega328p 8 MHz Arduino Pro Mini
+//
+// 2022-08-20 Georg Sauthoff <mail@gms.tf>
+
+
 #include <avr/io.h>
+#include <avr/sfr_defs.h>
+
 #include <util/delay.h>
-#include <avr/interrupt.h>
 #include <util/twi.h>
 
-// Define the baud rate and calculate the UBRR value
-#define F_CPU 16000000UL
-#define UBRR_VALUE ((F_CPU / (16UL * BAUD_RATE)) - 1)
+#include <stdio.h>
 
-void USART_Init(unsigned int ubrr) {
-    // Set baud rate
-    UBRR0H = (unsigned char)(ubrr >> 8);
-    UBRR0L = (unsigned char)ubrr;
-    
-    // Enable receiver and transmitter
-    UCSR0B = (1 << RXEN0) | (1 << TXEN0);
-    
-    // Set frame format: 8 data, 1 stop bit
-    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+
+// copied and modified from: https://www.nongnu.org/avr-libc/user-manual/group__avr__stdio.html
+static int uart_putchar(char c, FILE *stream)
+{
+    if (c == '\n')
+        uart_putchar('\r', stream);
+    loop_until_bit_is_set(UCSR0A, UDRE0);
+    UDR0 = c;
+    return 0;
 }
 
-void USART_Transmit(unsigned char data) {
-    // Wait for empty transmit buffer
-    while (!(UCSR0A & (1 << UDRE0)))
-        ;
-    // Put data into buffer, sends the data
-    UDR0 = data;
+static FILE uart_stdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
+
+static void setup_uart()
+{
+    // in case UART was put into power-reduction mode ...
+    PRR1 &= ~ _BV(PRUSART0);  // Use PRR1 for ATmega2560
+
+    // configure speed
+#define BAUD 38400
+    // NB: <- max rate with 8MHz ATmega328p
+#include <util/setbaud.h>
+    UBRR0H = UBRRH_VALUE;
+    UBRR0L = UBRRL_VALUE;
+#if USE_2X
+    // USART Control and Status Register A (Port 0)
+    UCSR0A |= _BV(U2X0);
+#else
+    UCSR0A &= ~ _BV(U2X0);
+#endif
+#undef BAUD
+
+    // USART Control and Status Register B:
+    // - Enable transmitter only
+    UCSR0B = _BV(TXEN0);
+    // 8N1
+    UCSR0C = _BV(UCSZ01) | _BV(UCSZ00);
 }
 
-void I2C_Init() {
-    // Initialize I2C with default settings
-    i2c_init();
+
+// at 8 Mhz
+static void i2c_set_100kHz()
+{
+    TWBR = 32;
+}
+static void i2c_set_400kHz()
+{
+    TWBR = 2;
 }
 
-void I2C_ProbeAddresses() {
-    uint8_t address;
-    uint8_t status;
-    
-    USART_Transmit('\n');
-    USART_Transmit('I');
-    USART_Transmit('2');
-    USART_Transmit('C');
-    USART_Transmit(' ');
-    USART_Transmit('A');
-    USART_Transmit('d');
-    USART_Transmit('d');
-    USART_Transmit('r');
-    USART_Transmit('e');
-    USART_Transmit('s');
-    USART_Transmit('s');
-    USART_Transmit('e');
-    USART_Transmit('s');
-    USART_Transmit(':');
-    USART_Transmit('\n');
-    
-    for (address = 1; address <= 127; address++) {
-        status = i2c_start(address << 1);
-        i2c_stop();
-        
-        if (status == 0) {
-            // Address acknowledged, print it
-            USART_Transmit('0' + ((address >> 4) & 0x0F));
-            USART_Transmit('0' + (address & 0x0F));
-            USART_Transmit(' ');
-        }
+// NB: clearing TWINT starts next transmission
+//     TWI == I2C
+//     TWCR = TWI Control Register
+//     TWDR = TWI Data Register
+
+// start master transmission
+static void i2c_start()
+{
+    // clear TWINT flag, send START, enable TWI unit
+    TWCR = _BV(TWINT) | _BV(TWSTA) | _BV(TWEN);
+    loop_until_bit_is_set(TWCR, TWINT);
+    // NB: TWSTA must be cleared explicitly in the next operation
+}
+static void i2c_stop()
+{
+    // clear TWINT flag, send STOP, enable TWI unit
+    TWCR = _BV(TWINT) | _BV(TWSTO) | _BV(TWEN);
+    loop_until_bit_is_clear(TWCR, TWSTO);
+    // NB: TWSTO is cleared automatically
+    // NB: TWINT is NOT set after STOP transmission ...
+}
+// rw: TW_READ (1) or TW_WRITE (0)
+static void i2c_set_address(uint8_t addr, uint8_t rw)
+{
+    TWDR = (addr << 1) | rw;
+    // clear TWINT flag, send STOP, enable TWI unit
+    TWCR = _BV(TWINT) | _BV(TWEN);
+    loop_until_bit_is_set(TWCR, TWINT);
+}
+
+static void setup()
+{
+    setup_uart();
+    stdout = &uart_stdout;
+    i2c_set_100kHz();
+
+    // uncomment if your I2C modules don't come with pull-ups ...
+    // DDRC &= ~ _BV(DDC4); PORTC |= _BV(PORTC4);
+    // DDRC &= ~ _BV(DDC5); PORTC |= _BV(PORTC5);
+}
+
+static void probe_address(uint8_t i)
+{
+    i2c_start();
+    i2c_set_address(i, TW_WRITE);
+    if ((TWSR & TW_STATUS_MASK) == TW_MT_SLA_ACK)
+         printf("Found device on address: 0x%" PRIx8 " (%" PRIu8 ")\n", i, i);
+    i2c_stop();
+}
+
+static void scan()
+{
+    // skipping reserved addresses
+    // cf. https://en.wikipedia.org/wiki/I%C2%B2C#Reserved_addresses_in_7-bit_address_space
+    for (uint32_t i = 8; i<128; ++i)
+        probe_address(i);
+}
+
+int main()
+{
+    setup();
+
+    for (;;) {
+        printf("Scanning I2C bus at 100 kHz ...\n");
+        scan();
+
+        printf("Scanning I2C bus at 400 kHz ...\n");
+        i2c_set_400kHz();
+        scan();
+
+        printf("done\n\n");
+
+        i2c_set_100kHz();
+
+        for (uint16_t i = 0; i < 30 * 30; ++i)
+            _delay_ms(32);
     }
-    
-    USART_Transmit('\n');
-}
 
-int main(void) {
-    // Initialize UART
-    USART_Init(UBRR_VALUE);
-    
-    // Initialize I2C
-    I2C_Init();
-    
-    // Enable global interrupts
-    sei();
-    
-    while (1) {
-        // Probe for I2C addresses and print them
-        I2C_ProbeAddresses();
-        
-        // Delay before probing again (adjust as needed)
-        _delay_ms(1000);
-    }
+    return 0;
 }
-
