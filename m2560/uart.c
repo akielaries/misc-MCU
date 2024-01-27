@@ -1,9 +1,9 @@
 #include <avr/io.h>
-#include <util/delay.h>
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
+#include <util/delay.h>
 
-#define F_CPU 16000000UL  // Define the clock frequency
+#define F_CPU 16000000UL // Define the clock frequency
 
 void USART_init() {
     // Set baud rate: 9600 baud, assuming F_CPU = 16MHz
@@ -19,13 +19,14 @@ void USART_init() {
 
 void USART_transmit_char(char data) {
     // Wait for empty transmit buffer
-    while (!(UCSR0A & (1 << UDRE0)));
+    while (!(UCSR0A & (1 << UDRE0)))
+        ;
 
     // Put data into buffer, sends the data
     UDR0 = data;
 }
 
-void USART_transmit_string(const char* str) {
+void USART_transmit_string(const char *str) {
     // Transmit each character in the string
     for (size_t i = 0; i < strlen(str); ++i) {
         USART_transmit_char(str[i]);
@@ -41,7 +42,7 @@ void USART_transmit_int(int value) {
 void USART_transmit_float(float value) {
     char buffer[20];
     int intPart = (int)value;
-    int fracPart = (int)((value - intPart) * 100);  // Two decimal places
+    int fracPart = (int)((value - intPart) * 100); // Two decimal places
     sprintf(buffer, "%d.%02d\n", intPart, fracPart);
     USART_transmit_string(buffer);
 }
@@ -49,7 +50,7 @@ void USART_transmit_float(float value) {
 void USART_transmit_double(double value) {
     char buffer[20];
     int intPart = (int)value;
-    int fracPart = (int)((value - intPart) * 100);  // Two decimal places
+    int fracPart = (int)((value - intPart) * 100); // Two decimal places
     sprintf(buffer, "%d.%02d\n", intPart, fracPart);
     USART_transmit_string(buffer);
 }
@@ -58,7 +59,7 @@ int main(void) {
     USART_init();
 
     while (1) {
-        const char* message = "Hello World!\n";
+        const char *message = "Hello World!\n";
         USART_transmit_string(message);
 
         int intValue = 42;
@@ -75,4 +76,3 @@ int main(void) {
 
     return 0;
 }
-

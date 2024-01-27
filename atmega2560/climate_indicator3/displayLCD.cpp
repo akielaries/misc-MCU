@@ -1,12 +1,12 @@
 /*
  * source files testing displaying sensor values to
  * connect LCD screen using C++
-*/ 
-#include <Arduino.h>
-#include <Adafruit_BME280.h>
-#include <LiquidCrystal_I2C.h>
-#include "BME280.h"
+ */
 #include "displayLCD.h"
+#include "BME280.h"
+#include <Adafruit_BME280.h>
+#include <Arduino.h>
+#include <LiquidCrystal_I2C.h>
 
 #define SEALEVELPRESSURE_HPA (1013.25)
 
@@ -17,18 +17,18 @@ LiquidCrystal_I2C lcd(0x27, 16, 02);
 
 // initialize LCD screen with I2C address and dimensions 16x02
 LCD::LCD(int addr, int width, int height) {
-    LiquidCrystal_I2C lcd(addr, width, height);       
+    LiquidCrystal_I2C lcd(addr, width, height);
 }
 
 // display to LCD screen using infinite while loop to constantly
 // iterate through the called methods
 void LCD::main() {
-    while(1){      
+    while (1) {
         displayTemp();
         displayPressure();
         delay(5000);
         lcd.clear();
-        
+
         displayAltitude();
         displayHumidity();
         delay(5000);

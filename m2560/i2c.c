@@ -2,7 +2,6 @@
 //
 // 2022-08-20 Georg Sauthoff <mail@gms.tf>
 
-
 #include <avr/io.h>
 #include <avr/sfr_defs.h>
 
@@ -11,10 +10,9 @@
 
 #include <stdio.h>
 
-
-// copied and modified from: https://www.nongnu.org/avr-libc/user-manual/group__avr__stdio.html
-static int uart_putchar(char c, FILE *stream)
-{
+// copied and modified from:
+// https://www.nongnu.org/avr-libc/user-manual/group__avr__stdio.html
+static int uart_putchar(char c, FILE *stream) {
     if (c == '\n')
         uart_putchar('\r', stream);
     loop_until_bit_is_set(UCSR0A, UDRE0);
@@ -22,12 +20,12 @@ static int uart_putchar(char c, FILE *stream)
     return 0;
 }
 
-static FILE uart_stdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
+static FILE uart_stdout =
+    FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
-static void setup_uart()
-{
+static void setup_uart() {
     // in case UART was put into power-reduction mode ...
-    PRR1 &= ~ _BV(PRUSART0);  // Use PRR1 for ATmega2560
+    PRR1 &= ~_BV(PRUSART0); // Use PRR1 for ATmega2560
 
     // configure speed
 #define BAUD 38400
@@ -39,7 +37,7 @@ static void setup_uart()
     // USART Control and Status Register A (Port 0)
     UCSR0A |= _BV(U2X0);
 #else
-    UCSR0A &= ~ _BV(U2X0);
+    UCSR0A &= ~_BV(U2X0);
 #endif
 #undef BAUD
 
@@ -50,14 +48,11 @@ static void setup_uart()
     UCSR0C = _BV(UCSZ01) | _BV(UCSZ00);
 }
 
-
 // at 8 Mhz
-static void i2c_set_100kHz()
-{
+static void i2c_set_100kHz() {
     TWBR = 32;
 }
-static void i2c_set_400kHz()
-{
+static void i2c_set_400kHz() {
     TWBR = 2;
 }
 
@@ -67,15 +62,13 @@ static void i2c_set_400kHz()
 //     TWDR = TWI Data Register
 
 // start master transmission
-static void i2c_start()
-{
+static void i2c_start() {
     // clear TWINT flag, send START, enable TWI unit
     TWCR = _BV(TWINT) | _BV(TWSTA) | _BV(TWEN);
     loop_until_bit_is_set(TWCR, TWINT);
     // NB: TWSTA must be cleared explicitly in the next operation
 }
-static void i2c_stop()
-{
+static void i2c_stop() {
     // clear TWINT flag, send STOP, enable TWI unit
     TWCR = _BV(TWINT) | _BV(TWSTO) | _BV(TWEN);
     loop_until_bit_is_clear(TWCR, TWSTO);
@@ -83,16 +76,14 @@ static void i2c_stop()
     // NB: TWINT is NOT set after STOP transmission ...
 }
 // rw: TW_READ (1) or TW_WRITE (0)
-static void i2c_set_address(uint8_t addr, uint8_t rw)
-{
+static void i2c_set_address(uint8_t addr, uint8_t rw) {
     TWDR = (addr << 1) | rw;
     // clear TWINT flag, send STOP, enable TWI unit
     TWCR = _BV(TWINT) | _BV(TWEN);
     loop_until_bit_is_set(TWCR, TWINT);
 }
 
-static void setup()
-{
+static void setup() {
     setup_uart();
     stdout = &uart_stdout;
     i2c_set_100kHz();
@@ -102,25 +93,23 @@ static void setup()
     // DDRC &= ~ _BV(DDC5); PORTC |= _BV(PORTC5);
 }
 
-static void probe_address(uint8_t i)
-{
+static void probe_address(uint8_t i) {
     i2c_start();
     i2c_set_address(i, TW_WRITE);
     if ((TWSR & TW_STATUS_MASK) == TW_MT_SLA_ACK)
-         printf("Found device on address: 0x%" PRIx8 " (%" PRIu8 ")\n", i, i);
+        printf("Found device on address: 0x%" PRIx8 " (%" PRIu8 ")\n", i, i);
     i2c_stop();
 }
 
-static void scan()
-{
+static void scan() {
     // skipping reserved addresses
-    // cf. https://en.wikipedia.org/wiki/I%C2%B2C#Reserved_addresses_in_7-bit_address_space
-    for (uint32_t i = 8; i<128; ++i)
+    // cf.
+    // https://en.wikipedia.org/wiki/I%C2%B2C#Reserved_addresses_in_7-bit_address_space
+    for (uint32_t i = 8; i < 128; ++i)
         probe_address(i);
 }
 
-int main()
-{
+int main() {
     setup();
 
     for (;;) {

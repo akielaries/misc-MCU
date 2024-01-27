@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <avr/io.h>
-#include <util/delay.h>
-#include <OneWire.h>
 #include <DallasTemperature.h>
+#include <OneWire.h>
+#include <avr/io.h>
+#include <stdio.h>
+#include <util/delay.h>
 
 #define ONE_WIRE_BUS 8
 #define MS_DELAY 3000

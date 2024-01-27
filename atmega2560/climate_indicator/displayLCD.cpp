@@ -1,11 +1,11 @@
 /*
  * source files testing displaying sensor values to
  * connect LCD screen using C++
-*/ 
+ */
 
+#include "displayLCD.h"
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
-#include "displayLCD.h"
 
 LiquidCrystal_I2C lcd(0x27, 16, 02);
 /*
@@ -17,7 +17,7 @@ LCD::LCD(int LCDaddr) {
 }
 */
 void LCD::displayLCD() {
-    lcd.begin(16,02);
+    lcd.begin(16, 02);
     for (int i = 0; i < 3; i++) {
         lcd.backlight();
         delay(250);

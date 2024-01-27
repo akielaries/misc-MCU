@@ -1,14 +1,14 @@
 /*
- * library used to display the temperature value of 
+ * library used to display the temperature value of
  * the DS18B20 sensor
-*/
+ */
 
 /*
 #include <Arduino.h>
-#include <Wire.h>
-#include <OneWire.h>
 #include <DallasTemperature.h>
+#include <OneWire.h>
 #include <SPI.h>
+#include <Wire.h>
 // define GIO pin to read from
 #define ONE_WIRE_BUS 8
 
@@ -28,7 +28,7 @@ void DS::printDSToSerial() {
     fahrenheit = sensors.toFahrenheit(celsius);
 
     Serial.println("From DS18B20 Sensor: ");
-    
+
     // print temperature values
     Serial.println("From DS18B20 sensor: ");
     Serial.print("Temperature = ");
