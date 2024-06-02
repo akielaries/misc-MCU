@@ -1,18 +1,29 @@
-CC = avr-gcc
+CC      = avr-gcc
+MCU     = atmega328p
+F_CPU   = 16000000UL
+DEV     = /dev/ttyACM0
+BAUD    = 115200
+SRC     = blink_led3.c
+OBJ     = $(SRC:.c=.o)
+TARGET  = blink3
 
-MCU = atmega328p
-F_CPU = 16000000UL
+CFLAGS  = -Os -DF_CPU=$(F_CPU) -mmcu=$(MCU)
+LDFLAGS = -mmcu=$(MCU)
 
-compile:
-	$(CC) -Os -DF_CPU=$(F_CPU) -mmcu=$(MCU) -c -o blink2.o blink_led2.c
-	$(CC) -mmcu=$(MCU) blink2.o -o blink2
+all: $(TARGET).hex
 
-objcpy:
-	avr-objcopy -O ihex -R .eeprom blink2 blink2.hex
+$(TARGET).elf: $(OBJ)
+	$(CC) $(LDFLAGS) -o $@ $^
 
-avrdude:
-	sudo avrdude -F -V -D -c arduino -p $(MCU) -P /dev/ttyUSB0 -b 115200 -U flash:w:blink2.hex
+$(OBJ): $(SRC)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+%.hex: %.elf
+	avr-objcopy -O ihex -R .eeprom $< $@
+
+upload: $(TARGET).hex
+	sudo avrdude -F -V -D -c arduino -p $(MCU) -P $(DEV) -b $(BAUD) -U flash:w:$<
 
 clean:
-	rm -f *.o *.hex blink2
+	rm -f *.o *.hex *.elf $(TARGET)
 

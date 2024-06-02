@@ -68,6 +68,7 @@ void main() {
         //to make PC13 high and bit 29 (pin + 0x10) to make it low respectively.
         *((volatile unsigned int *)0x40011010) = (1U << 13);
         *((volatile unsigned int *)0x40011010) = (1U << 14);
+        wait();
         *((volatile unsigned int *)0x40011010) = (1U << 15);
         wait();
 
